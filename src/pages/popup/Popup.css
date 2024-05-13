@@ -1,45 +1,192 @@
 .App {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  text-align: center;
   height: 100%;
-  padding: 10px;
   background-color: #282c34;
+  padding: 40px;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 30vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.App * {
+  box-sizing: border-box;
 }
 
 .App-header {
-  height: 100%;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  color: white;
+  text-align: center;
+}
+
+.App-container {
+  margin-top: 32px;
+  color: white;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-columns: 1fr;
+  gap: 16px;
+  min-height: 100vh;
+}
+
+.App-container__title {
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 16px 0;
+}
+
+.App-container__heading {
+  color: white;
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.App__header-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  position: relative;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.App__header-input-container .App__header-label {
+  font-size: 15px;
+  padding-left: 10px;
+  position: absolute;
+  top: 12px;
+  transition: 0.3s;
+  pointer-events: none;
+  font-weight: 400;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App__header-input {
+  width: 100%;
+  height: 45px;
+  border: none;
+  outline: none;
+  padding: 0px 7px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 15px;
+  background-color: transparent;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 1), -1px -1px 6px rgba(255, 255, 255, 0.4);
+}
+
+.App__header-input:focus,
+.App__header-input-container .App__header-input:not(:placeholder-shown) {
+  border: 2px solid transparent;
+  color: #fff;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 1),
+    -1px -1px 6px rgba(255, 255, 255, 0.4),
+    inset 3px 3px 10px rgba(0, 0, 0, 1),
+    inset -1px -1px 6px rgba(255, 255, 255, 0.4);
+}
+
+.App__header-input-container .App__header-input:focus~.App__header-label,
+.App__header-input-container .App__header-input:not(:placeholder-shown)~.App__header-label {
+  transition: 0.3s;
+  padding-left: 2px;
+  transform: translateY(-35px);
+  font-weight: 700;
+}
+
+.App__header-input-container .App__header-input:focus {
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 1),
+    -1px -1px 6px rgba(255, 255, 255, 0.4),
+    inset 3px 3px 10px rgba(0, 0, 0, 1),
+    inset -1px -1px 6px rgba(255, 255, 255, 0.4);
+}
+
+.warning-text {
+  margin: 0;
+  padding: 32px;
+  background-color: #212121;
+  align-self: center;
+  justify-self: center;
+  color: white;
+  font-size: 2em;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.button {
+  margin-top: 32px;
+  width: 170px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  background: #e62222;
+}
+
+.button.is--green {
+  background: #026307;
+}
+
+.button,
+.button-icon,
+.button-text {
+  transition: 200ms;
+}
+
+.button-icon {
+  position: absolute;
+  border-left: 1px solid #c41b1b;
+  transform: translateX(130px);
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button.is--green .button-icon {
+  border-left: 1px solid #015607;
+}
+
+.button-text {
+  transform: translateX(35px);
+  color: white;
+  font-weight: bold;
+}
+
+.button-icon svg {
+  width: 15px;
+  fill: #eee;
+}
+
+.button:hover {
+  background: #ff3636;
+}
+
+.button.is--green:hover {
+  background: #04b50d;
+}
+
+.button:hover .button-text {
+  color: transparent;
+}
+
+.button:hover .button-icon {
+  width: 150px;
+  border-left: none;
+  transform: translateX(10px);
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:active .button-icon svg {
+  transform: scale(0.8);
 }
