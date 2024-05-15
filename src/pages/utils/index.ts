@@ -9,4 +9,4 @@ export {
   getAuthenticatedUserOrgs,
 } from './github_api';
 
-export { getUserToken, exchangeCodeForToken } from './getUserToken';
+export { getURLwithCode, exchangeCodeForToken } from './gitHubOauthFlow';

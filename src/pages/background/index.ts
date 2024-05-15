@@ -1,11 +1,9 @@
 import reloadOnUpdate from 'virtual:reload-on-update-in-background-script';
 import 'webextension-polyfill';
 import { sendMessage } from '../utils';
-import { exchangeCodeForToken } from '../utils/getUserToken';
+import { exchangeCodeForToken } from '../utils/gitHubOauthFlow';
 
 reloadOnUpdate('pages/background');
-
-/* let activeTab: chrome.tabs.Tab | undefined; */
 
 type TabCallback = (tab: chrome.tabs.Tab | undefined) => void;
 
@@ -19,20 +17,9 @@ export async function getCurrentTab(callback: TabCallback) {
   });
 }
 
-/* chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
-  if (changeInfo.status === 'complete') {
-    getCurrentTab(currentTab => {
-      activeTab = currentTab;
-      chrome.tabs.sendMessage(activeTab.id, {
-        type: 'INITIALIZE',
-        activeTab,
-      });
-    });
-  }
-}); */
-
 chrome.runtime.onMessage.addListener(message => {
   if (message.type === 'oauth') {
+    console.log('Receiving message from oauth.html on the background: ', message);
     const url = new URL(message.url);
     const code = url.searchParams.get('code');
 
@@ -69,11 +56,6 @@ chrome.runtime.onMessage.addListener(message => {
   }
   if (message.type === 'NEW_URL') {
     chrome.tabs.update({ url: message.newUrl });
-  } else if (message.type === 'NEW_DATA') {
-    const obj = {
-      dataChanged: message.dataChanged,
-    };
-    sendMessage('SEND_NEW_DATA', { obj });
   } else if (message.type === 'REPOSITORIES_DATA') {
     chrome.runtime.sendMessage({ type: 'REPOSITORIES_DATA_POPUP', data: message.data, userId: message.userId });
   }

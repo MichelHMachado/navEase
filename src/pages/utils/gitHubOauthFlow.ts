@@ -4,13 +4,18 @@ const CLIENT_SECRET = import.meta.env.VITE_CLIENT_SECRET;
 const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI;
 const SCOPES = import.meta.env.VITE_SCOPES.split(' ').join('%20');
 
-export const getUserToken = async () => {
+export const getURLwithCode = async () => {
   const authUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPES}`;
-  console.log('authUrl inside getUserToken: ', authUrl);
-  await chrome.identity.launchWebAuthFlow({
-    url: authUrl,
-    interactive: true,
-  });
+  console.log('authUrl inside getURLwithCode: ', authUrl);
+  await chrome.identity.launchWebAuthFlow(
+    {
+      url: authUrl,
+      interactive: true,
+    },
+    redirectURL => {
+      console.log('redirectURL: ', redirectURL);
+    },
+  );
 };
 
 export const exchangeCodeForToken = async (code: string): Promise<string | null> => {

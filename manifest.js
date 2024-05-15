@@ -43,7 +43,7 @@ const manifest = {
   ],
   web_accessible_resources: [
     {
-      resources: ['assets/js/*.js', 'assets/css/*.css', 'icon-128.png', 'icon-32.png', 'oauth.html'],
+      resources: ['assets/js/*.js', 'assets/css/*.css', 'icon-128.png', 'icon-32.png', 'src/pages/popup/oauth.html'],
       matches: ['*://*/*'],
     },
   ],

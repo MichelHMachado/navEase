@@ -7,7 +7,7 @@ import './Popup.css';
 
 import { getCurrentTab } from '../background';
 
-import { sendMessage, getUserToken } from '../utils';
+import { sendMessage, getURLwithCode } from '../utils';
 
 import Loader from './components/loader/Loader';
 import RepositoryList from './components/repository-list/RepositoryList';
@@ -30,9 +30,7 @@ const Popup: React.FC = () => {
       const accessToken = result.accessToken;
       if (!accessToken) {
         try {
-          getUserToken().then(() => {
-            setLoading(false);
-          });
+          getURLwithCode().then(() => {});
         } catch (error) {
           console.log('Failed to get the Token: ', error);
         }
@@ -102,42 +100,38 @@ const Popup: React.FC = () => {
     .sort((a, b) => a.name.localeCompare(b.name));
 
   return isGitHubPage ? (
-    accessToken ? (
-      <div className="App">
-        {loading ? (
-          <Loader />
-        ) : (
-          <>
-            <header className="App-header">GitHub NavEase</header>
-            <img className="rounded-full mx-auto" src={logo} alt="GitHub NavEase Logo" />
-            <h1 className="App-container__heading">Effortlessly Navigate to Your Repositories</h1>
-            <div className="App-container">
-              <div>
-                <RepositoryList
-                  repositories={otherRepositories}
-                  title="User's Not Authored Repositories"
-                  onClick={goToPageById}
-                />
-              </div>
+    <div className="App">
+      {loading || !accessToken ? (
+        <Loader />
+      ) : (
+        <>
+          <header className="App-header">GitHub NavEase</header>
+          <img className="rounded-full mx-auto" src={logo} alt="GitHub NavEase Logo" />
+          <h1 className="App-container__heading">Effortlessly Navigate to Your Repositories</h1>
+          <div className="App-container">
+            <div>
+              <RepositoryList
+                repositories={otherRepositories}
+                title="User's Not Authored Repositories"
+                onClick={goToPageById}
+              />
+            </div>
 
-              <div>
-                <RepositoryList
-                  repositories={userRepositories}
-                  title="User's Authored Repositories"
-                  onClick={goToPageById}
-                />
-              </div>
+            <div>
+              <RepositoryList
+                repositories={userRepositories}
+                title="User's Authored Repositories"
+                onClick={goToPageById}
+              />
             </div>
-            <div className="flex gap-6">
-              <Button onClick={updateData} text={'Update Data'} icon={checkIcon} buttonClass="is--green" />
-              <Button icon={close} onClick={deleteAccessToken} text="Delete Token" />
-            </div>
-          </>
-        )}
-      </div>
-    ) : (
-      <h1 className="warning-text">Please authenticate with GitHub!</h1>
-    )
+          </div>
+          <div className="flex gap-6">
+            <Button onClick={updateData} text={'Update Data'} icon={checkIcon} buttonClass="is--green" />
+            <Button icon={close} onClick={deleteAccessToken} text="Delete Token" />
+          </div>
+        </>
+      )}
+    </div>
   ) : (
     <h1 className="warning-text">This is not a GitHub page!</h1>
   );
