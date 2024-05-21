@@ -19,7 +19,7 @@ const manifest = {
   name: 'GitHub NavEase',
   version: packageJson.version,
   description: 'Simplify navigation to repositories you have access to but were not the original creator.',
-  permissions: ['storage', 'tabs', 'scripting', 'activeTab', 'identity'],
+  permissions: ['storage', 'tabs', 'activeTab', 'identity'],
   background: {
     service_worker: 'src/pages/background/index.js',
     type: 'module',
