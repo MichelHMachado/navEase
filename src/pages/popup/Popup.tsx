@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 import logo from '../../assets/img/icon-128.png';
+import gitHubLogo from '../../assets/img/github-icon.svg';
+import linkedinLogo from '../../assets/img/linkedin-logo.svg';
 import checkIcon from '../../assets/img/check-svgrepo-com.svg';
 import close from '../../assets/img/close.svg';
 import './Popup.css';
@@ -105,8 +107,29 @@ const Popup: React.FC = () => {
         <Loader />
       ) : (
         <>
-          <header className="App-header">GitHub NavEase</header>
-          <img className="rounded-full mx-auto" src={logo} alt="GitHub NavEase Logo" />
+          <div className="relative">
+            <div>
+              <img className="rounded-full mx-auto" src={logo} alt="GitHub NavEase Logo" />
+              <header className="App-header">GitHub NavEase</header>
+            </div>
+            <div className="absolute top-0">
+              <h3 className="text-white">
+                Developed by{' '}
+                <a className="underline" href="https://michel-machado.vercel.app/">
+                  Michel Machado
+                </a>
+              </h3>
+              <div className="flex gap-2 mt-2">
+                <a href="https://www.linkedin.com/in/michel-machado-23a749a3/">
+                  <img width="20px" src={linkedinLogo} alt="Linkedin Logo" />
+                </a>
+                <a href="https://github.com/MichelHMachado">
+                  <img width="20px" src={gitHubLogo} alt="Github Logo" />
+                </a>
+              </div>
+            </div>
+          </div>
+
           <h1 className="App-container__heading">Effortlessly Navigate to Your Repositories</h1>
           <div className="App-container">
             <div>
