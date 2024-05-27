@@ -32,7 +32,7 @@
     "construct-style-sheets-polyfill": "3.1.0",
     "dotenv": "^16.4.5",
     "octokit": "^4.0.2",
-    "react": "18.2.0",
+    "react": "18.3.1",
     "react-dom": "18.2.0",
     "webextension-polyfill": "0.10.0"
   },
@@ -47,7 +47,7 @@
     "@twind/preset-tailwind": "^1.1.4",
     "@types/chrome": "0.0.263",
     "@types/node": "20.8.10",
-    "@types/react": "18.2.37",
+    "@types/react": "18.3.3",
     "@types/react-dom": "18.2.18",
     "@types/ws": "8.5.8",
     "@typescript-eslint/eslint-plugin": "6.10.0",
