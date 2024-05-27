@@ -39,7 +39,7 @@ To start developing the extension:
 3. Make changes to the code and the extension will automatically reload.
 
 For Firefox development:
-   Only diference is using npm dev:firefox
+   Only difference is using npm dev:firefox
 
 ## Contributing
 Contributions are welcome! Please follow these steps:
