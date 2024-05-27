@@ -87,6 +87,12 @@ const Popup: React.FC = () => {
     });
   };
 
+  const openExternalLink = (url: string) => {
+    return () => {
+      chrome.tabs.create({ url, active: true });
+    };
+  };
+
   const updateData = () => {
     setLoading(true);
     setDataReceived(false);
@@ -112,18 +118,26 @@ const Popup: React.FC = () => {
               <img className="rounded-full mx-auto" src={logo} alt="GitHub NavEase Logo" />
               <header className="App-header">GitHub NavEase</header>
             </div>
+
             <div className="absolute top-0">
               <h3 className="text-white">
                 Developed by{' '}
-                <a className="underline" href="https://michel-machado.vercel.app/">
+                <a
+                  onClick={openExternalLink('https://michel-machado.vercel.app/')}
+                  className="underline"
+                  href="https://michel-machado.vercel.app/">
                   Michel Machado
                 </a>
               </h3>
               <div className="flex gap-2 mt-2">
-                <a href="https://www.linkedin.com/in/michel-machado-23a749a3/">
+                <a
+                  onClick={openExternalLink('https://www.linkedin.com/in/michel-machado-23a749a3/')}
+                  href="https://www.linkedin.com/in/michel-machado-23a749a3/">
                   <img width="20px" src={linkedinLogo} alt="Linkedin Logo" />
                 </a>
-                <a href="https://github.com/MichelHMachado">
+                <a
+                  onClick={openExternalLink('https://github.com/MichelHMachado')}
+                  href="https://github.com/MichelHMachado">
                   <img width="20px" src={gitHubLogo} alt="Github Logo" />
                 </a>
               </div>
@@ -131,6 +145,10 @@ const Popup: React.FC = () => {
           </div>
 
           <h1 className="App-container__heading">Effortlessly Navigate to Your Repositories</h1>
+          <div className="flex gap-6 justify-center mb-4">
+            <Button onClick={updateData} text={'Update Data'} icon={checkIcon} buttonClass="is--green" />
+            <Button icon={close} onClick={deleteAccessToken} text="Delete Token" />
+          </div>
           <div className="App-container">
             <div>
               <RepositoryList
@@ -147,10 +165,6 @@ const Popup: React.FC = () => {
                 onClick={goToPageById}
               />
             </div>
-          </div>
-          <div className="flex gap-6">
-            <Button onClick={updateData} text={'Update Data'} icon={checkIcon} buttonClass="is--green" />
-            <Button icon={close} onClick={deleteAccessToken} text="Delete Token" />
           </div>
         </>
       )}
